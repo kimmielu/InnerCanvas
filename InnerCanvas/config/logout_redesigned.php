@@ -12,6 +12,6 @@ require_once '../includes/auth.php';
 logoutUser();
 
 // Redirect to login page
-header("Location: ../pages/public/login.php");
+header("Location: ../pages/public/login_redeigned.php");
 exit();
 ?>
