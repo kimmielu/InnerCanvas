@@ -139,19 +139,16 @@ CREATE TABLE Reflection (
 -- ============================================================
 
 CREATE TABLE ExpressionPost (
-    post_id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT PRIMARY KEY AUTO_INCREMENT,
     member_id INT NOT NULL,
-    title VARCHAR(150) NOT NULL,
-    content TEXT NOT NULL,
-    anonymous_status BOOLEAN DEFAULT FALSE,
-    moderation_status VARCHAR(20) DEFAULT 'Pending',
-    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (member_id) REFERENCES YouthMember(member_id) ON DELETE CASCADE,
-    INDEX idx_member_id (member_id),
-    INDEX idx_moderation_status (moderation_status),
-    INDEX idx_created_date (created_date)
+    title VARCHAR(255) NOT NULL,
+    content LONGTEXT NOT NULL,
+    is_anonymous BOOLEAN DEFAULT 0,
+    is_approved BOOLEAN DEFAULT 0,
+    resonance_count INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (member_id) REFERENCES YouthMember(member_id) ON DELETE CASCADE
 );
-
 -- ============================================================
 -- TABLE 9: Report
 -- Purpose: Store reports of inappropriate content
@@ -211,6 +208,16 @@ CREATE TABLE Notification (
     INDEX idx_status (status)
 );
 
+CREATE TABLE PostResonance (
+    resonance_id INT PRIMARY KEY AUTO_INCREMENT,
+    post_id INT NOT NULL,
+    member_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES ExpressionPost(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (member_id) REFERENCES YouthMember(member_id) ON DELETE CASCADE,
+    UNIQUE KEY unique_resonance (post_id, member_id)
+);
+
 -- ============================================================
 -- DATABASE CREATION COMPLETE
 -- ============================================================
@@ -227,7 +234,3 @@ CREATE TABLE Notification (
 -- 9. Report - Content reports
 -- 10. Resource - Wellness resources
 -- 11. Notification - Member notifications
---
--- All relationships and constraints implemented.
--- Ready for application development.
--- ============================================================
