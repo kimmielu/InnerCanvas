@@ -1,19 +1,18 @@
 <?php
 session_start();
-require_once dirname(__DIR__) . '/config/db_connection.php';
-require_once dirname(__DIR__) . '/includes/auth.php';
+require_once("../../config/db_connection.php");
+require_once '../../includes/auth.php';
 
 requireLogin();
 $user = getCurrentUser();
 
 if ($user['admin_role'] !== 'none') {
-    header("Location: ../admin/admin_dashboard.php");
+    header("Location: ../../admin/admin_dashboard.php");
     exit();
 }
 
 $member_id = $user['member_id'];
 
-// Today's mood check
 $today = date('Y-m-d');
 $today_query = "SELECT mood_score FROM MoodEntry WHERE member_id = ? AND DATE(entry_date) = ?";
 $stmt = mysqli_prepare($conn, $today_query);
@@ -29,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['record_mood'])) {
     $stmt = mysqli_prepare($conn, $insert);
     mysqli_stmt_bind_param($stmt, 'iss', $member_id, $mood_score, $mood_note);
     if (mysqli_stmt_execute($stmt)) {
-        header("Location: sidequests.php");
+        header("Location: ../../youth_member/sidequests.php");
         exit();
     }
 }

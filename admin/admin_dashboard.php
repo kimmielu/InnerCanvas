@@ -114,7 +114,7 @@ while ($row = mysqli_fetch_assoc($members_result)) {
                 <?php if ($user['admin_role'] === 'super_admin'): ?>
                     <a href="admin_manage_admins.php">Manage Admins</a>
                 <?php endif; ?>
-                <a href="../../config/logout.php" class="logout-btn">Logout</a>
+                <a href="/InnerCanvas/config/logout.php" class="logout-btn">Logout</a>
             </div>
         </div>
     </header>
@@ -208,3 +208,4 @@ while ($row = mysqli_fetch_assoc($members_result)) {
     </div>
 </body>
 </html>
+

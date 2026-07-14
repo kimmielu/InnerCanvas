@@ -78,7 +78,7 @@ while ($row = mysqli_fetch_assoc($users_result)) {
             <div class="nav-links">
                 <a href="admin_dashboard.php">Dashboard</a>
                 <a href="admin_manage_admins.php">Manage Admins</a>
-                <a href="../../config/logout.php" class="logout-btn">Logout</a>
+               <a href="/InnerCanvas/config/logout.php" class="logout-btn">Logout</a>
             </div>
         </div>
     </header>

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once dirname(__DIR__) . '/config/db_connection.php';
-require_once dirname(__DIR__) . '/includes/auth.php';
+require_once dirname(__DIR__, 2) . '/config/db_connection.php';
+require_once dirname(__DIR__, 2) . '/includes/auth.php';
 
 requireLogin();
 $user = getCurrentUser();

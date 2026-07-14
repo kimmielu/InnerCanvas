@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         if ($result['success']) {
             // Redirect based on role
             if ($result['admin_role'] === 'super_admin' || $result['admin_role'] === 'admin') {
-                header("Location: admin/admin_dashboard.php");
+               header("Location: ../admin/admin_dashboard.php");
             } else {
                 header("Location: youth_member/dashboard.php");
             }
